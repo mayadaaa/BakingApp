@@ -1,4 +1,5 @@
 package com.example.bakingapp;
+
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +14,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.example.bakingapp.adapter.StepNumberAdapter;
 import com.example.bakingapp.model.step;
 import com.example.bakingapp.util.constantUTL;
 
@@ -22,8 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class controllerActivity  extends AppCompatActivity  implements View.OnClickListener
-        , StepNumberAdapter.OnStepClick{
+public class controllerActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String STEP_LIST_STATE = "step_list_state";
     public static final String STEP_NUMBER_STATE = "step_number_state";
@@ -47,7 +46,6 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
     ArrayList<step> mStepArrayList = new ArrayList<>();
     String mJsonResult;
     boolean isFromWidget;
-    StepNumberAdapter mStepNumberAdapter;
     LinearLayoutManager mLinearLayoutManager;
 
     @Override
@@ -59,10 +57,9 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Check if device is a tablet
-        if(findViewById(R.id.cooking_tablet) != null){
+        if (findViewById(R.id.cooking_tablet) != null) {
             isTablet = true;
-        }
-        else{
+        } else {
             isTablet = false;
         }
 
@@ -74,15 +71,13 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
             if (intent.hasExtra(constantUTL.JSON_RESULT_EXTRA)) {
                 mJsonResult = getIntent().getStringExtra(constantUTL.JSON_RESULT_EXTRA);
             }
-            if(intent.getStringExtra(constantUTL.WIDGET_EXTRA) != null){
+            if (intent.getStringExtra(constantUTL.WIDGET_EXTRA) != null) {
                 isFromWidget = true;
-            }
-            else{
+            } else {
                 isFromWidget = false;
             }
         }
-        // If there is no saved state, instantiate fragment
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             playVideo(mStepArrayList.get(mVideoNumber));
         }
 
@@ -92,7 +87,7 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
     }
 
     // Initialize fragment
-    public void playVideo(step step){
+    public void playVideo(step step) {
         videoPlayer videoPlayerFragment = new videoPlayer();
         Bundle stepsBundle = new Bundle();
         stepsBundle.putParcelable(constantUTL.STEP_SINGLE, step);
@@ -106,7 +101,7 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
     }
 
     // Initialize fragment
-    public void playVideoReplace(step step){
+    public void playVideoReplace(step step) {
         videoPlayer videoPlayerFragment = new videoPlayer();
         Bundle stepsBundle = new Bundle();
         stepsBundle.putParcelable(constantUTL.STEP_SINGLE, step);
@@ -142,19 +137,16 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
     @Override
     public void onClick(View v) {
         //If it's last step show cooking is over
-        if(mVideoNumber == mStepArrayList.size()-1){
+        if (mVideoNumber == mStepArrayList.size() - 1) {
             Toast.makeText(this, R.string.cooking_is_over, Toast.LENGTH_SHORT).show();
-        }
-        else{
-            if(v.getId() == mButtonPreviousStep.getId()){
+        } else {
+            if (v.getId() == mButtonPreviousStep.getId()) {
                 mVideoNumber--;
-                if(mVideoNumber < 0){
+                if (mVideoNumber < 0) {
                     Toast.makeText(this, R.string.you_better_see_next_step, Toast.LENGTH_SHORT).show();
-                }
-                else
+                } else
                     playVideoReplace(mStepArrayList.get(mVideoNumber));
-            }
-            else if(v.getId() == mButtonNextStep.getId()){
+            } else if (v.getId() == mButtonNextStep.getId()) {
                 mVideoNumber++;
                 playVideoReplace(mStepArrayList.get(mVideoNumber));
             }
@@ -162,23 +154,22 @@ public class controllerActivity  extends AppCompatActivity  implements View.OnCl
     }
 
 
-    @Override
+   /* @Override
     public void onStepClick(int position) {
         mVideoNumber = position;
         playVideoReplace(mStepArrayList.get(position));
-    }
+    }*/
 
-    public void handleUiForDevice(){
-        if(!isTablet){
+    public void handleUiForDevice() {
+        if (!isTablet) {
             // Set button listeners
             mButtonNextStep.setOnClickListener(this);
             mButtonPreviousStep.setOnClickListener(this);
-        }
-        else{//Tablet view
-            mStepNumberAdapter = new StepNumberAdapter(this,mStepArrayList, this, mVideoNumber);
+        } else {//Tablet view
+            //   mStepNumberAdapter = new StepNumberAdapter(this,mStepArrayList, this, mVideoNumber);
             mLinearLayoutManager = new LinearLayoutManager(this);
             mRecyclerViewSteps.setLayoutManager(mLinearLayoutManager);
-            mRecyclerViewSteps.setAdapter(mStepNumberAdapter);
+            // mRecyclerViewSteps.setAdapter(mStepNumberAdapter);
         }
     }
 

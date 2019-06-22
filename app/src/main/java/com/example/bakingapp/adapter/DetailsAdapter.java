@@ -44,17 +44,11 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.RecipeDe
         @BindView(R.id.tv_unit_number)
         TextView unitNumber;
 
-      /* @Nullable
-        @BindView(R.id.tv_ingredient_number)
-        TextView ingredientRowNumber;*/
 
         @Nullable
         @BindView(R.id.tv_unit_long_name)
         TextView ingredientUnitLongName;
 
-       /* @Nullable
-        @BindView(R.id.iv_ingredient_checked)
-        ImageView ingredientChecked;*/
 
         public RecipeDetailsViewHolder(View v) {
             super(v);
@@ -88,28 +82,6 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.RecipeDe
                 break;
             }
         }
-        /*int unitIcon = constantUTL.unitIcons[unitNo];
-        Log.d("UNIT_NO: ", String.valueOf(unitIcon));
-        String unitLongName = constantUTL.unitName[unitNo];
-
-        holder.unitIcon.setImageResource(unitIcon);
-        holder.ingredientUnitLongName.setText(unitLongName);
-
-        final boolean isChecked = false;*/
-
-      /*  holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(holder.ingredientChecked.getVisibility() == View.GONE){
-                    holder.ingredientChecked.setVisibility(View.VISIBLE);
-                }
-                else{
-                    holder.ingredientChecked.setVisibility(View.GONE);
-                }
-
-
-            }
-        });*/
 
     }
 
