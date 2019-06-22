@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.example.bakingapp.R;
 import com.example.bakingapp.RecipeDetailsActivity;
+import com.example.bakingapp.Widgetservices;
 import com.example.bakingapp.model.result;
 import com.example.bakingapp.util.constantUTL;
-import com.example.bakingapp.widget.widgetService;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -102,11 +102,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
                 if(Build.VERSION.SDK_INT > 25){
                     //Start the widget service to update the widget
-                    widgetService.startActionOpenRecipeO(mContext);
+                    Widgetservices.startActionOpenRecipeO(mContext);
                 }
                 else{
                     //Start the widget service to update the widget
-                    widgetService.startActionOpenRecipe(mContext);
+                    Widgetservices.startActionOpenRecipe(mContext);
                 }
             }
         });

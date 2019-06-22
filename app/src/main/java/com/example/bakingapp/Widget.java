@@ -1,4 +1,4 @@
-package com.example.bakingapp.widget;
+package com.example.bakingapp;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,16 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import com.example.bakingapp.R;
-import com.example.bakingapp.RecipeDetailsActivity;
 import com.example.bakingapp.util.constantUTL;
 
-public class widgetProvider  extends AppWidgetProvider {
+/**
+ * Implementation of App Widget functionality.
+ */
+public class Widget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, String jsonRecipeIngredients, int imgResId, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+                               int appWidgetId) {
 
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
 
         Intent intent = new Intent(context, RecipeDetailsActivity.class);
         intent.putExtra(constantUTL.WIDGET_EXTRA,"CAME_FROM_WIDGET");
@@ -39,7 +40,7 @@ public class widgetProvider  extends AppWidgetProvider {
     // Gets called once created and on every update period
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        widgetService.startActionOpenRecipe(context);
+        Widgetservices.startActionOpenRecipe(context);
     }
 
     public static void updateWidgetRecipe(Context context, String jsonRecipe , int imgResId, AppWidgetManager appWidgetManager,
@@ -60,3 +61,4 @@ public class widgetProvider  extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 }
+

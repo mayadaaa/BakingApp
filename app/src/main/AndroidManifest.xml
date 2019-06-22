@@ -12,17 +12,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:launchMode="singleTop">
+        <receiver android:name=".Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="RecipeDetailsActivity"
-            android:label="Ingredients" android:launchMode="singleTop">
+            android:name=".RecipeDetailsActivity"
+            android:label="Ingredients"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -33,16 +46,16 @@
                 android:value=".RecipeDetailsActivity" />
         </activity>
 
-        <service android:name=".widget.widgetService" />
+        <service android:name=".Widgetservices" />
 
-        <receiver android:name=".widget.widgetProvider">
+        <receiver android:name=".Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.appwidget.provider"
-               />
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+
         </receiver>
     </application>
 

@@ -1,11 +1,10 @@
-package com.example.bakingapp.widget;
+package com.example.bakingapp;
 
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -22,17 +21,15 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class widgetService extends IntentService {
-
+public class Widgetservices extends IntentService {
     public static final String ACTION_OPEN_RECIPE =
-            "io.github.akndmr.yummio.widget.yummio_widget_service";
+            "io.github.mayada.widget._Widget_service";
 
-
-    public widgetService(String name) {
+    public Widgetservices(String name) {
         super(name);
     }
 
-    public widgetService() {
+    public Widgetservices() {
         super("YummioWidgetService");
     }
 
@@ -84,22 +81,23 @@ public class widgetService extends IntentService {
         }
         String ingredientsString = stringBuilder.toString();
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, widgetProvider.class));
-        widgetProvider.updateWidgetRecipe(this, ingredientsString, imgResId, appWidgetManager, appWidgetIds);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, Widget.class));
+        Widget.updateWidgetRecipe(this, ingredientsString, imgResId, appWidgetManager, appWidgetIds);
     }
 
 
     // Trigger the service to perform the action
     public static void startActionOpenRecipe(Context context) {
-        Intent intent = new Intent(context, widgetService.class);
+        Intent intent = new Intent(context, Widgetservices.class);
         intent.setAction(ACTION_OPEN_RECIPE);
         context.startService(intent);
     }
 
     // For Android O and above
     public static void startActionOpenRecipeO(Context context) {
-        Intent intent = new Intent(context, widgetService.class);
+        Intent intent = new Intent(context, Widgetservices.class);
         intent.setAction(ACTION_OPEN_RECIPE);
         ContextCompat.startForegroundService(context, intent);
     }
 }
+
