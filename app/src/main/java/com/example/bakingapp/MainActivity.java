@@ -68,11 +68,7 @@ public class MainActivity extends AppCompatActivity {
             if (Network.isConnected(this)) {
                 mRecipeService = new RecipeClient().mRecipeService;
                 new FetchRecipesAsync().execute();
-            } /*  } else {
-                Dialog.showDialogWithButtons(this,
-                        R.drawable.yellow_cake,
-                        getResources().getString(R.string.no_internet_connection));
-            }*/
+            }
 
         }
     }
